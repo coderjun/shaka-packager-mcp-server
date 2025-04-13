@@ -1,0 +1,18 @@
+version: 0.1.0
+project:
+  name: shaka-packager-mcp
+dependencies:
+  - "mcp[cli]>=1.5.0"
+development-dependencies:
+  - pytest>=7.0.0
+  - black>=23.0.0
+  - isort>=5.12.0
+environments:
+  - name: dev
+    dependencies:
+      all: true
+      development: true
+  - name: prod
+    dependencies:
+      all: true
+      development: false
