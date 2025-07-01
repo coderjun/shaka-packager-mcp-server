@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/coderjun-shaka-packager-mcp-server-badge.png)](https://mseep.ai/app/coderjun-shaka-packager-mcp-server)
+
 # Shaka Packager MCP Server
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
