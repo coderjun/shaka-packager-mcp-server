@@ -16,6 +16,10 @@
 >
 > Please report any issues you encounter to help improve the project.
 
+<a href="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server/badge" alt="Shaka Packager Server MCP server" />
+</a>
+
 An MCP (Model Context Protocol) server that integrates [Shaka Packager](https://shaka-project.github.io/shaka-packager/) with Claude AI applications for video transcoding, packaging, and analysis.
 
 This server works with the [Filesystem MCP Server](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) to enable Claude Desktop to access and process video files on your computer, turning Claude into a powerful assistant for media processing tasks.
