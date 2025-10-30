@@ -1,5 +1,3 @@
-[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/coderjun-shaka-packager-mcp-server-badge.png)](https://mseep.ai/app/coderjun-shaka-packager-mcp-server)
-
 # Shaka Packager MCP Server
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -21,6 +19,9 @@
 <a href="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server/badge" alt="Shaka Packager Server MCP server" />
 </a>
+
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/coderjun-shaka-packager-mcp-server-badge.png)](https://mseep.ai/app/coderjun-shaka-packager-mcp-server)
+[![Verified on MseeP](https://mseep.ai/badge.svg)](https://mseep.ai/app/ca990493-244b-4644-9cdd-a92857f1ba7b)
 
 An MCP (Model Context Protocol) server that integrates [Shaka Packager](https://shaka-project.github.io/shaka-packager/) with Claude AI applications for video transcoding, packaging, and analysis.
 
