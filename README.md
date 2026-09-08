@@ -2,19 +2,17 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/downloads/)
-[![Status: Alpha](https://img.shields.io/badge/Status-Alpha%20%7C%20Experimental-red)](https://github.com/coderjun/shaka-packager-mcp)
+[![Status: Alpha](https://img.shields.io/badge/Status-Alpha-orange)](https://github.com/coderjun/shaka-packager-mcp-server)
 
-> **⚠️ EXPERIMENTAL STATUS DISCLAIMER**
-> 
-> This project is in early alpha stage and is highly experimental. It is not recommended for production use. It is also likely **MESSY!**
-> 
-> **Current limitations:**
-> - You may run into inconsistent behavior
-> - Advanced features (packaging, conversion, etc.) are still under active development
-> - Path translation between Docker and host environments may require manual configuration
-> - Expect frequent breaking changes and potential instability
+> **Status: alpha.** Analysis is the most exercised path. Treat this as a
+> working prototype rather than a production dependency.
 >
-> Please report any issues you encounter to help improve the project.
+> **Known limitations:**
+> - Packaging and conversion are still under active development
+> - Path translation between Docker and host environments may need manual configuration
+> - Interfaces may change between releases
+>
+> Issue reports are welcome and genuinely useful.
 
 <a href="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server/badge" alt="Shaka Packager Server MCP server" />
@@ -51,33 +49,21 @@ This server works with the [Filesystem MCP Server](https://github.com/modelconte
 
 ## Installation
 
-### Using pip or uv (coming soon)
+### From source
 
-Install the package with pip:
-
-```bash
-pip install shaka-packager-mcp
-```
-
-Or with uv:
+The package is not published to PyPI yet, so install from a clone.
 
 ```bash
-uv pip install shaka-packager-mcp
-```
-
-### From source (recommended)
-
-```bash
-git clone https://github.com/coderjun/shaka-packager-mcp.git
-cd shaka-packager-mcp
+git clone https://github.com/coderjun/shaka-packager-mcp-server.git
+cd shaka-packager-mcp-server
 pip install -e .
 ```
 
 Or with uv:
 
 ```bash
-git clone https://github.com/coderjun/shaka-packager-mcp.git
-cd shaka-packager-mcp
+git clone https://github.com/coderjun/shaka-packager-mcp-server.git
+cd shaka-packager-mcp-server
 uv pip install -e .
 ```
 
@@ -170,7 +156,7 @@ For example:
         "run",
         "--with",
         "mcp[cli]",
-        "/Users/username/Development/shaka-packager-mcp/shaka_packager_mcp.py"
+        "/Users/username/Development/shaka-packager-mcp-server/shaka_packager_mcp.py"
       ],
       "env": {
         "VIDEO_PATH": "/Users/username/Videos",
@@ -289,8 +275,8 @@ LOG_LEVEL=DEBUG
 
 ```bash
 # Clone the repository
-git clone https://github.com/coderjun/shaka-packager-mcp.git
-cd shaka-packager-mcp
+git clone https://github.com/coderjun/shaka-packager-mcp-server.git
+cd shaka-packager-mcp-server
 
 # Install development dependencies with pip
 pip install -e ".[dev]"
@@ -341,7 +327,7 @@ If you encounter any issues or have questions:
 1. Check the troubleshooting section in this README
 2. Review the [Shaka Packager documentation](https://shaka-project.github.io/shaka-packager/html/index.html)
 3. Use the `get_shaka_documentation` tool for interactive help within Claude
-4. [Open an issue](https://github.com/coderjun/shaka-packager-mcp/issues) on GitHub
+4. [Open an issue](https://github.com/coderjun/shaka-packager-mcp-server/issues) on GitHub
 
 ## Acknowledgements
 

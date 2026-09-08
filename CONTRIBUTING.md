@@ -12,8 +12,8 @@ To set up a development environment:
 
 ```bash
 # Clone the repository
-git clone https://github.com/coderjun/shaka-packager-mcp.git
-cd shaka-packager-mcp
+git clone https://github.com/coderjun/shaka-packager-mcp-server.git
+cd shaka-packager-mcp-server
 
 # Install development dependencies with pip
 pip install -e ".[dev]"
