@@ -1,6 +1,6 @@
 version: 0.1.0
 project:
-  name: shaka-packager-mcp
+  name: shaka-packager-mcp-server
 dependencies:
   - "mcp[cli]>=1.5.0"
 development-dependencies:

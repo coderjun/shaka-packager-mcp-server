@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(
-    name="shaka-packager-mcp",
+    name="shaka-packager-mcp-server",
     version="0.1.0",
     description="MCP server for Shaka Packager integration",
     long_description=open("README.md").read(),
@@ -34,7 +34,7 @@ setup(
     python_requires=">=3.10",
     entry_points={
         "console_scripts": [
-            "shaka-packager-mcp=shaka_packager_mcp:main",
+            "shaka-packager-mcp-server=shaka_packager_mcp:main",
         ],
     },
 )

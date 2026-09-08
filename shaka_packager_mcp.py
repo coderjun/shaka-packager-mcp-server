@@ -24,7 +24,7 @@ logging.basicConfig(
     level=os.environ.get("LOG_LEVEL", "INFO"),
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
 )
-logger = logging.getLogger("shaka-packager-mcp")
+logger = logging.getLogger("shaka-packager-mcp-server")
 
 # Import MCP after logging setup
 try:
