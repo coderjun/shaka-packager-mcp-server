@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Capped the `mcp` dependency below 2.0. mcp 2.x removed the FastMCP API this server uses, so fresh installs and the documented Claude Desktop setup failed to start.
 - Shutdown no longer deletes a user-set `TEMP_DIR`. `TEMP_DIR` is now only a parent location: the server saves uploads in its own `shaka-mcp-` subdirectory inside it and deletes only that subdirectory. This also stops an unused temporary directory from being created when `TEMP_DIR` is set.
 
+### Changed
+- Documented the security model and aligned the feature list with alpha status.
+
 ## [0.1.0] - 2025-04-12
 
 ### Added
