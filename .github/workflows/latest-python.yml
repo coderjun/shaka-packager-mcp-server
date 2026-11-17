@@ -1,0 +1,54 @@
+name: Latest Python
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    outputs:
+      python-version: ${{ steps.python.outputs.python-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: python
+        with:
+          python-version: "3.x"
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Run tests
+        run: pytest
+
+  report-failure:
+    needs: pytest
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Open or update the tracking issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PYTHON_VERSION: ${{ needs.pytest.outputs.python-version }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Tests fail on the newest Python release"
+          body="The scheduled test run on the newest Python release failed.
+
+          - Python: ${PYTHON_VERSION:-unknown}
+          - Run: $RUN_URL
+
+          Pull requests are not blocked by this. Review the failure and fix it, or record why it can wait."
+          existing=$(gh issue list --state open --limit 200 --json number,title \
+            --jq ".[] | select(.title == \"$title\") | .number" | head -n 1)
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body"
+          fi
