@@ -2,7 +2,6 @@
 Basic tests for the Shaka Packager MCP server.
 """
 
-import asyncio
 import os
 import sys
 import unittest
@@ -16,7 +15,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 import shaka_packager_mcp
 
 
-class TestShakaPackagerMCP(unittest.TestCase):
+class TestShakaPackagerMCP(unittest.IsolatedAsyncioTestCase):
     """Basic tests for the Shaka Packager MCP server."""
 
     def setUp(self):
@@ -113,11 +112,6 @@ class TestShakaPackagerMCP(unittest.TestCase):
 
         # Verify mocks were called
         self.assertEqual(mock_run_command.call_count, 2)
-
-
-def run_async_test(coro):
-    """Run an async test function."""
-    return asyncio.run(coro)
 
 
 if __name__ == "__main__":
