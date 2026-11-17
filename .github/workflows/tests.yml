@@ -1,0 +1,31 @@
+name: Tests
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    name: pytest (${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    # The newest Python is an early warning only and does not fail the run.
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - python-version: "3.10"
+            experimental: false
+          - python-version: "3.x"
+            experimental: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: pip install -e ".[dev]"
+      - name: Run tests
+        run: pytest
