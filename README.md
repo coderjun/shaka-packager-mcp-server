@@ -14,6 +14,38 @@
 >
 > Issue reports are welcome and genuinely useful.
 
+## Security model
+
+This is a local, single-user MCP server that communicates with a desktop MCP client over standard input
+and output. It does not implement authentication or authorization in this mode. Do not expose it on a
+network or share one server instance between users.
+
+The server runs the Shaka Packager executable as a subprocess without a shell. Command arguments are
+parsed with `shlex` and passed to `asyncio.create_subprocess_exec`, so shell metacharacters in arguments
+are not interpreted. Shell-safe is not command-safe: Packager flags and file paths supplied by the client
+are still untrusted.
+
+`run_shaka_packager` accepts Packager arguments supplied by the MCP client. The server does not restrict
+input or output paths, so Packager may read or write anywhere the account running the server can. Run the
+server with least privilege, for example in a container with only the intended video directory mounted,
+and review tool calls in the MCP client before approving them.
+
+Files received as `file://` resources are saved under their base filename only, in a `shaka-mcp-`
+subdirectory that the server creates at startup and that only the account running the server can open.
+The server deletes that subdirectory when it shuts down normally. Setting `TEMP_DIR` only chooses where
+the subdirectory is created. `TEMP_DIR` itself and anything else in it are left in place.
+
+### Shared or remote use
+
+Shared or remote use is not built. At minimum it would need:
+
+- OAuth 2.1 resource-server support following the MCP authorization specification
+- Per-tool scopes, such as read-only analysis and write-capable packaging
+- Propagation of the authenticated user's identity
+- Allowlisted input and output directories
+- An argument allowlist for `run_shaka_packager`
+- An audit log of every tool call
+
 <a href="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/@coderjun/shaka-packager-mcp-server/badge" alt="Shaka Packager Server MCP server" />
 </a>
@@ -27,17 +59,13 @@ This server works with the [Filesystem MCP Server](https://github.com/modelconte
 
 ## Features
 
-- **Video Analysis**: Analyze video files to extract detailed stream information, codecs, bitrates, and more
-- **Media Packaging**: Convert videos for streaming in HLS and DASH formats with support for VOD and live streaming
-- **Advanced Options**: 
-  - Apply DRM encryption (Widevine, PlayReady, FairPlay)
-  - Configure ad insertion markers
-  - Convert between formats (MP4, TS, etc.)
-- **Intelligent Path Handling**: Automatically translates paths between Docker and host environments
-- **Robust Error Management**: Provides meaningful error analysis with suggestions for resolution
-- **Command Assistance**: Helps correctly format Shaka Packager commands for optimal results
-- **Interactive Documentation**: Built-in help and examples to guide users through complex operations
-- **Detailed Outputs**: Comprehensive summaries and execution details for all operations
+- Video analysis: examines media files and reports stream information such as codecs and bitrates
+- Media packaging: interface support for HLS and DASH, VOD and live; less exercised than video analysis
+- Advanced options: interface support for DRM encryption, ad markers, and format conversion; less exercised than video analysis
+- Path handling: translates configured Docker and host paths
+- Error reporting: returns execution errors and related context
+- Command assistance: provides command-format guidance
+- Documentation: provides help and examples
 
 ## Prerequisites
 
@@ -309,10 +337,10 @@ This server is designed to work with the official MCP filesystem server for acce
 
 ### Key Features in the Implementation
 
-- **Robust path handling**: Automatically translates paths between Docker and host environments
-- **Smart error handling**: Provides meaningful error messages and suggestions
-- **Command syntax assistance**: Helps correctly format Shaka Packager commands
-- **Documentation integration**: Provides comprehensive documentation and examples
+- Path translation between configured Docker and host paths
+- Error reporting with execution details
+- Command-format guidance
+- Documentation and example support
 
 ## License
 
