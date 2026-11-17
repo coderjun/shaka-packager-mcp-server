@@ -16,7 +16,7 @@
       "args": [
         "run",
         "--with",
-        "mcp[cli]",
+        "mcp[cli]>=1.5.0,<2",
         "/ABSOLUTE/PATH/TO/shaka_packager_mcp.py"
       ],
       "env": {

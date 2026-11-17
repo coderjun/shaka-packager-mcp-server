@@ -116,7 +116,7 @@ Add the following configuration, making sure to use absolute paths:
       "args": [
         "run",
         "--with",
-        "mcp[cli]",
+        "mcp[cli]>=1.5.0,<2",
         "/ABSOLUTE/PATH/TO/shaka_packager_mcp.py"
       ],
       "env": {
@@ -155,7 +155,7 @@ For example:
       "args": [
         "run",
         "--with",
-        "mcp[cli]",
+        "mcp[cli]>=1.5.0,<2",
         "/Users/username/Development/shaka-packager-mcp-server/shaka_packager_mcp.py"
       ],
       "env": {
