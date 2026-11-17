@@ -12,7 +12,7 @@ setup(
     author_email="junheider@gmail.com",
     py_modules=["shaka_packager_mcp"],
     install_requires=[
-        "mcp[cli]>=1.5.0",
+        "mcp[cli]>=1.5.0,<2",
         "python-dotenv",
     ],
     extras_require={
