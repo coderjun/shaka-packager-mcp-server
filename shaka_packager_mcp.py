@@ -143,10 +143,22 @@ def translate_command_args(args):
 # Initialize the MCP server
 mcp = FastMCP("shaka-packager")
 
-# Configure temporary directory
-TEMP_DIR = Path(os.environ.get("TEMP_DIR", tempfile.mkdtemp()))
-logger.info(f"Using temporary directory: {TEMP_DIR}")
-TEMP_DIR.mkdir(parents=True, exist_ok=True)
+
+def create_upload_dir(base: Optional[str]) -> Path:
+    """
+    Create a server-owned upload directory inside base.
+
+    base is only a parent location and is never deleted. When base is None,
+    the directory is created in the system temporary directory.
+    """
+    if base:
+        Path(base).mkdir(parents=True, exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="shaka-mcp-", dir=base))
+
+
+# Configure the upload directory. TEMP_DIR, if set, is only its parent location.
+UPLOAD_DIR = create_upload_dir(os.environ.get("TEMP_DIR"))
+logger.info(f"Using upload directory: {UPLOAD_DIR}")
 
 # Configure command timeout
 COMMAND_TIMEOUT = int(os.environ.get("COMMAND_TIMEOUT", 300))  # Default: 5 minutes
@@ -154,7 +166,7 @@ COMMAND_TIMEOUT = int(os.environ.get("COMMAND_TIMEOUT", 300))  # Default: 5 minu
 
 def save_uploaded_file(file_data: bytes, filename: str) -> Path:
     """Save uploaded file data to a temporary file."""
-    file_path = TEMP_DIR / filename
+    file_path = UPLOAD_DIR / filename
     with open(file_path, "wb") as f:
         f.write(file_data)
     logger.info(f"Saved uploaded file to {file_path}")
@@ -1136,13 +1148,13 @@ Based on the error above, what do you think is happening and how can I fix it?
 
 
 def cleanup():
-    """Clean up temporary files."""
+    """Remove the server-owned upload directory. TEMP_DIR itself is left in place."""
     import shutil
 
     try:
-        if TEMP_DIR.exists():
-            shutil.rmtree(TEMP_DIR, ignore_errors=True)
-            logger.info(f"Cleaned up temporary directory: {TEMP_DIR}")
+        if UPLOAD_DIR.exists():
+            shutil.rmtree(UPLOAD_DIR, ignore_errors=True)
+            logger.info(f"Cleaned up upload directory: {UPLOAD_DIR}")
     except Exception as e:
         logger.error(f"Error during cleanup: {str(e)}")
 

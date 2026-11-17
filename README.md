@@ -253,7 +253,7 @@ The server can be configured using environment variables:
 - `SHAKA_PACKAGER_PATH`: Path to the Shaka Packager executable (highly recommended for Claude Desktop)
 - `VIDEO_PATH`: Path to your local video directory (used for translating paths between Docker and host)
 - `DOCKER_PATH`: Docker container mount path (default: "/projects/video-drop")
-- `TEMP_DIR`: Custom temporary directory for file uploads
+- `TEMP_DIR`: Parent directory for uploaded files (default: the system temp directory). The server creates its own `shaka-mcp-` subdirectory inside it and deletes only that subdirectory on shutdown.
 - `LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
 - `COMMAND_TIMEOUT`: Timeout in seconds for Shaka Packager commands (default: 300)
 
