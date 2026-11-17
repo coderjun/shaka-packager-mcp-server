@@ -8,6 +8,8 @@
 > working prototype rather than a production dependency.
 >
 > **Known limitations:**
+> - `file://` URIs do not work yet, so pass plain file paths such as `/Users/username/Videos/clip.mp4`
+>   ([#12](https://github.com/coderjun/shaka-packager-mcp-server/issues/12))
 > - Packaging and conversion are still under active development
 > - Path translation between Docker and host environments may need manual configuration
 > - Interfaces may change between releases
